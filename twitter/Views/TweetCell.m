@@ -8,9 +8,78 @@
 
 #import "TweetCell.h"
 #import "UIImageView+AFNetworking.h"
+#import "APIManager.h"
 
 
 @implementation TweetCell
+- (IBAction)didTapRetweet:(id)sender {
+    UIButton *buttonRetweet = (UIButton *)sender;
+    
+    if(self.tweet.retweeted){
+        self.tweet.retweeted = NO;
+        self.tweet.retweetCount -= 1;
+        //UI
+        [buttonRetweet setImage:[UIImage imageNamed:@"retweet-icon.png"] forState:UIControlStateNormal];
+        [self.retweetButton setTitle:[NSString stringWithFormat:@"%d", self.tweet.retweetCount] forState:UIControlStateNormal];
+        [[APIManager shared] unfavorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
+            if(error){
+                 NSLog(@"Error unretweeting tweet: %@", error.localizedDescription);
+            }else{
+                NSLog(@"Successfully unretweeted the following Tweet: %@", tweet.text);
+            }
+        }];
+    
+    }else{
+        self.tweet.retweeted = YES;
+        self.tweet.retweetCount += 1;
+        // TODO: Update cell UI
+        [buttonRetweet setImage:[UIImage imageNamed:@"retweet-icon-green.png"] forState:UIControlStateNormal];
+        [self.retweetButton setTitle:[NSString stringWithFormat:@"%d", self.tweet.retweetCount] forState:UIControlStateNormal];
+        // TODO: Send a POST request to the POST favorites/create endpoint
+         [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
+             if(error){
+                  NSLog(@"Error retweeting tweet: %@", error.localizedDescription);
+             }else{
+                 NSLog(@"Successfully retweeted the following Tweet: %@", tweet.text);
+             }
+         }];
+    }
+}
+
+- (IBAction)didTapFavorite:(id)sender {
+    //Update the local tweet model
+    UIButton *buttonFavorite = (UIButton *)sender;
+    
+    if(self.tweet.favorited){
+        self.tweet.favorited = NO;
+        self.tweet.favoriteCount -= 1;
+        //UI
+        [buttonFavorite setImage:[UIImage imageNamed:@"favor-icon.png"] forState:UIControlStateNormal];
+        [self.favoriteButton setTitle:[NSString stringWithFormat:@"%d", self.tweet.favoriteCount] forState:UIControlStateNormal];
+        [[APIManager shared] unfavorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
+            if(error){
+                 NSLog(@"Error unfavoriting tweet: %@", error.localizedDescription);
+            }else{
+                NSLog(@"Successfully unfavorited the following Tweet: %@", tweet.text);
+            }
+        }];
+    
+    }else{
+        self.tweet.favorited = YES;
+        self.tweet.favoriteCount += 1;
+        // TODO: Update cell UI
+        [buttonFavorite setImage:[UIImage imageNamed:@"favor-icon-red.png"] forState:UIControlStateNormal];
+        [self.favoriteButton setTitle:[NSString stringWithFormat:@"%d", self.tweet.favoriteCount] forState:UIControlStateNormal];
+        // TODO: Send a POST request to the POST favorites/create endpoint
+         [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
+             if(error){
+                  NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
+             }else{
+                 NSLog(@"Successfully favorited the following Tweet: %@", tweet.text);
+             }
+         }];
+    }
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -34,8 +103,8 @@
     self.userScreenNameLabel.text = self.tweet.user.screenName;
     self.dateCreatedLabel.text = self.tweet.createdAtString;
     self.textMessageLabel.text = self.tweet.text;
-    self.retweetCountLabel.text = [NSString stringWithFormat:@"%d", self.tweet.retweetCount];
-    self.favoriteCountLabel.text = [NSString stringWithFormat:@"%d", self.tweet.favoriteCount];
+    
+    [self.favoriteButton setTitle:[NSString stringWithFormat:@"%d", self.tweet.favoriteCount] forState:UIControlStateNormal];
     [self.retweetButton setTitle:[NSString stringWithFormat:@"%d", self.tweet.retweetCount] forState:UIControlStateNormal];
     NSString *URLString = tweet.user.profilePicture;
     NSURL *url = [NSURL URLWithString:URLString];
