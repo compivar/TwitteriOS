@@ -56,6 +56,9 @@ Here's a walkthrough of implemented user stories:
 <img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [Kap](https://getkap.co/).
+![jhcxGf96dc](https://user-images.githubusercontent.com/96851799/175751828-b9dac917-2724-4f7b-a762-7817646d8a4d.gif)
+
+![UAuvmA31sl](https://user-images.githubusercontent.com/96851799/175751844-7e3b7502-f19e-4e15-8377-a920863d5490.gif)
 
 ## Notes
 
