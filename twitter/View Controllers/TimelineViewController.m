@@ -12,6 +12,7 @@
 #import "LoginViewController.h"
 #import "TweetCell.h"
 #import "ComposeViewController.h"
+#import "TweetDetailsViewController.h"
 
 
 
@@ -48,9 +49,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if([segue.identifier isEqualToString:@"TweetDetailsSegue"]){
+        Tweet *tweet = self.arrayOfTweets[[self.timelineTableView indexPathForCell:sender].row];
+        TweetDetailsViewController *detailsController = [segue destinationViewController];
+        detailsController.tweet = tweet;
+    }else{
     UINavigationController *navigationController = [segue destinationViewController];
         ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
         composeController.delegate = self;
+    }
 }
 
 
