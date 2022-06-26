@@ -1,8 +1,8 @@
-# Project 2 - *Name of App Here*
+# Project 2 - Twitter client
 
-**Name of your app** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
+**Twitter client** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
-Time spent: **X** hours spent in total
+Time spent: **18** hours spent in total
 
 ## User Stories
 
@@ -56,6 +56,7 @@ Here's a walkthrough of implemented user stories:
 <img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [Kap](https://getkap.co/).
+
 ![jhcxGf96dc](https://user-images.githubusercontent.com/96851799/175751828-b9dac917-2724-4f7b-a762-7817646d8a4d.gif)
 
 ![UAuvmA31sl](https://user-images.githubusercontent.com/96851799/175751844-7e3b7502-f19e-4e15-8377-a920863d5490.gif)
@@ -63,6 +64,8 @@ GIF created with [Kap](https://getkap.co/).
 ## Notes
 
 Describe any challenges encountered while building the app.
+Getting the autolayout to look like the example.
+Updating the retweet+favorite buttons.
 
 ## Credits
 
